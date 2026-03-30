@@ -1,8 +1,8 @@
 cask "swooshy" do
-  version "2.2.5"
-  sha256 "9034d4dfa7d80d48612395b56fdd5664d55dc5a32a9a7b7a947df581a0fec44b"
+  version "2.2.6"
+  sha256 "f8dcd5caf02beba441d33059573891d48059732e1b83131d447bc7fbb7bfcd1e"
 
-  url "https://github.com/PeterPtroc/Swooshy/releases/download/2.2.5/Swooshy-macOS-2.2.5.zip",
+  url "https://github.com/PeterPtroc/Swooshy/releases/download/2.2.6/Swooshy-macOS-2.2.6.zip",
       verified: "github.com/PeterPtroc/Sweeesh/"
   name "Swooshy"
   desc "Open-source macOS touchpad-first window utility"
@@ -11,6 +11,8 @@ cask "swooshy" do
   depends_on macos: ">= :sonoma"
 
   app "Swooshy.app"
+
+  uninstall quit: "com.xiamiyu123.swooshy"
 
   # reset accessibility records after install/upgrade.
   postflight do
