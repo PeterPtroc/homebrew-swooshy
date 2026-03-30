@@ -1,8 +1,8 @@
 cask "swooshy" do
-  version "2.2.2"
-  sha256 "f42db059f9ed07b81a11ccb2489ec2a1634a412ecfffc8957568106d8228b2bf"
+  version "2.2.3"
+  sha256 "11b5c8effc5419088d30ea760afb632f37705ed6c867f2013ebdd4fe44d29747"
 
-  url "https://github.com/PeterPtroc/Swooshy/releases/download/2.2.2/Swooshy-macOS-2.2.2.zip",
+  url "https://github.com/PeterPtroc/Swooshy/releases/download/2.2.3/Swooshy-macOS-2.2.3.zip",
       verified: "github.com/PeterPtroc/Sweeesh/"
   name "Swooshy"
   desc "Open-source macOS touchpad-first window utility"
@@ -12,17 +12,17 @@ cask "swooshy" do
 
   app "Swooshy.app"
 
-  # Reset stale Accessibility TCC records after install/upgrade.
+  # reset accessibility records after install/upgrade.
   postflight do
-    system_command "tccutil",
-                   args: ["reset", "Accessibility", "com.xiamiyu123.swooshy"],
+    # tccutil exits non-zero when there is no existing record yet.
+    system_command "/bin/sh",
+                   args: ["-c", "tccutil reset Accessibility \"$1\" >/dev/null 2>&1 || true", "_", "com.xiamiyu123.swooshy"],
                    sudo: false
   end
 
-  # Remove records after uninstall.
   uninstall_postflight do
-    system_command "tccutil",
-                   args: ["reset", "Accessibility", "com.xiamiyu123.swooshy"],
+    system_command "/bin/sh",
+                   args: ["-c", "tccutil reset Accessibility \"$1\" >/dev/null 2>&1 || true", "_", "com.xiamiyu123.swooshy"],
                    sudo: false
   end
 end
